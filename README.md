@@ -171,7 +171,9 @@ constructor(baseUrl: string, options: RequestInit = {})
 - email: string; - почта оставившего заказ
 - phone: string; - телефон оставившего заказ
 
-Методы - сеттеры значений.
+Методы:
+- сеттеры значений.
+- Ordervalidation() - метод для валидации.
 
 ## Компоненты отображения
 
