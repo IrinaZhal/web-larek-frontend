@@ -170,7 +170,6 @@ constructor(baseUrl: string, options: RequestInit = {})
 - address: string; - адрес заказа
 - email: string; - почта оставившего заказ
 - phone: string; - телефон оставившего заказ
-- total: number; - сумма заказа
 
 Методы - сеттеры значений.
 
@@ -198,7 +197,7 @@ constructor(container: HTMLElement, protected events: IEvents);
 
 ### Class Basket
 
-Класс для отображения корзины и ее содержимого\
+Класс для отображения корзины и ее содержимого.\
 
 В полях класса хранятся следующие данные:
 - _list: HTMLElement; - лист с товарами для отображения карточек
@@ -207,17 +206,12 @@ constructor(container: HTMLElement, protected events: IEvents);
 - events: IEvents - экземпляр класса EventEmitter для инициации событий при изменении данных.
 
 Методы:
-- addItem(item: TCardMiniInfo): void; - для добавления карточек в корзину
-- deleteItem(item: TCardMiniInfo, playload: Function | null): void; - удаления карточек из карзины
-- set numberOfItems(count: number); - указываем количество товаров в корзине (понадобится для вывода на страницу в counter)
-- set total(total: number): void; - указываем общую сумму товаров в корзине
-- clearBasket() - очистить корзину после завершения заказа
-- basketValid() - проверка на наличие товаров в корзине, иначе заблокировать кнопку сабмитта
+- set items(items: HTMLElement[]) - заполняем корзину товарами
 - render() - возвращает сгенерированную верстку корзины
 
 ### Class Form
 
-Класс для работы с формами.\
+Класс для работы с формами.  
 
 Поля:
 - protected formElement: HTMLFormElement; - форма
@@ -226,7 +220,6 @@ constructor(container: HTMLElement, protected events: IEvents);
 - events: IEvents - экземпляр класса EventEmitter для инициации событий при изменении данных.
 
 Методы:
-- formValidation() - валидация формы
 - set errors() - установка ошибки валидации
 - clearValue() - очистка формы
 - render() - возвращение элемента формы
@@ -261,15 +254,15 @@ constructor(container: HTMLElement, protected events: IEvents);
 
 ### Class Card 
 
-Основной класс карточки
+Основной класс карточки.
 
 Поля:
 id: string; - уникальный идентификатор 
-description:string; - описание карточки
-image: string; - ссылка на картинку
+description?:string; - описание карточки
+image?: string; - ссылка на картинку
 title: string; - название товара
-category: string; - категория товара
-price: number; - цена товара
+category?: string; - категория товара
+price: number | null; - цена товара
 
 Методы:
 
@@ -277,6 +270,22 @@ price: number; - цена товара
 - render(): возвращает карточку с разметкой
 - isInBasket(): boolean; - метод который определяет была ли отправлена карточка в корзину
 - геттер id возвращает уникальный идентификатор
+
+### Class CardPreview extends Card
+
+Класс для превью карточки в модальном окне. Принимает темплейт карточки для превью экземпляр класса EventEmitter для инициации событий при изменении данных.
+
+Поля:
+- _button: HTMLElement; - для кнопки в корзину
+
+
+### Class BasketItem extends Card
+
+Класс для демонстрации карточки в листе товаров корзины. Принимает темплейт карточки для превью экземпляр класса EventEmitter для инициации событий при изменении данных.
+
+Поля:
+- _button: HTMLElement; - для кнопки удаления из корзины
+
 
 ## Презентер
 
