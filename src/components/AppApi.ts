@@ -31,7 +31,6 @@ export class AppApi extends Api implements IAppApi {
 		);
 	}
 
-	//TODO postOrder?
 	postOrder(order: IOrder): Promise<IOrderResult> {
 		return this.post('/order', order).then((data: IOrderResult) => data);
 	}
