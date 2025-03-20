@@ -26,8 +26,7 @@ export class CardsData implements ICardsData {
 
 	//устанавливает превью выбранной карточки
 	setPreview(item: ICard) {
-    this.preview = item.id;
+		this.preview = item.id;
 		this.events.emit('preview:changed', item);
 	}
-
 }
