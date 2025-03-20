@@ -1,48 +1,61 @@
+import { ApiPostMethods } from "../components/base/api";
+
 export interface ICard {
   id: string;
-  description?:string;
-  image?: string;
+  description:string;
+  image: string;
   title: string;
-  category?: string;
+  category: string;
   price: number | null;
-
-  isInBasket: boolean;
 }
 
 export interface IBasketData {
-  items: TCardMiniInfo[];
+  items: ICard[];
   total: number;
   
-  addItem(item: TCardMiniInfo): void;
-  deleteItem(item: TCardMiniInfo, playload: Function | null): void;
-  getNumberOfItems(items: ICard[]): number;
-  getTotal(items: ICard[]): number;
+  addItem(item: ICard): void;
+  deleteItem(item: ICard): void;
 }
 
 //для каталога карточек
 export interface ICardsData {
-  _cards: ICard[];
-  _preview: string | null; //для превью выбранной карточки
+  cards: ICard[];
+  preview: string | null; //для превью выбранной карточки
   
-  addCards(cards: ICard[]): void;
-  updateCard(card: ICard): void;
   getCard(cardId: string): ICard;
 }
 
-export interface IOrder {
-  payment: string;
-  address: string;
-}
-
-export interface IContact {
+export interface IContactForm {
   email: string;
   phone: string;
 }
 
-export type IOderData = IOrder & IContact & {
+export interface IOrderForm {
+  payment: string;
+  address: string;
+}
+
+//для всей инфы заказа
+export interface IOrderData {
+  payment: string; 
+  address: string;
+  email: string;
+  phone: string;
+}
+
+export interface IOrder extends IOrderData {
+  items: string[];
   total: number;
-};
+}
 
-export type TTotalBasket = Pick<IBasketData, 'total'>;
+export interface IOrderResult {
+  id: string | string[];
+  total: number;
+}
 
-export type TCardMiniInfo = Pick<ICard, 'id'| 'title'|'price'| 'isInBasket'>
+
+export interface IApi {
+  baseUrl: string;
+  get<T>(uri: string): Promise<T>;
+  post<T>(uri: string, data: object, method?: ApiPostMethods): Promise<T>;
+}
