@@ -191,20 +191,20 @@ events.on('order.payment:card', () => {
 
 events.on('order.payment:change', () => {
 	if (orderData.payment === 'card') {
-		order.buttonCash.classList.remove('button_alt-active');
-		order.buttonCard.classList.add('button_alt-active');
+		order.switchButton('cash', false);
+		order.switchButton('card', true);
 	}
 	if (orderData.payment === 'cash') {
-		order.buttonCard.classList.remove('button_alt-active');
-		order.buttonCash.classList.add('button_alt-active');
+		order.switchButton('card', false);
+		order.switchButton('cash', true);
 	}
 });
 
 //открываем заказ
 events.on('order:open', () => {
-	orderData.resetOrderData(); //очищаем прошлый заказ
-	order.buttonCash.classList.remove('button_alt-active'); //очищаем стили кнопок
-	order.buttonCard.classList.remove('button_alt-active');
+	orderData.reset(); //очищаем прошлый заказ
+	order.switchButton('cash', false); //очищаем стили кнопок
+	order.switchButton('card', false);
 	modal.render({
 		content: order.render({
 			address: '',
@@ -249,7 +249,7 @@ events.on('contacts:submit', () => {
 				content: success.render({ total: result.total }),
 			});
 
-			orderData.resetOrderData();
+			orderData.reset();
 			basketData.clearBasket();
 		})
 		.catch((err) => {

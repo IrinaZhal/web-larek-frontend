@@ -25,6 +25,21 @@ export class Order extends Form<IOrderForm> {
 		);
 	}
 
+	switchButton(button: string, value: boolean) {
+		if (button === 'cash' && value) {
+			this.buttonCash.classList.add('button_alt-active');
+		}
+		if (button === 'cash' && !value) {
+			this.buttonCash.classList.remove('button_alt-active');
+		}
+		if (button === 'card' && value) {
+			this.buttonCard.classList.add('button_alt-active');
+		}
+		if (button === 'card' && !value) {
+			this.buttonCard.classList.remove('button_alt-active');
+		}
+	}
+
 	set address(value: string) {
 		(this.container.elements.namedItem('address') as HTMLInputElement).value =
 			value;

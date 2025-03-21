@@ -70,7 +70,7 @@ export class OrderData implements IOrderData {
 	}
 
 	//reset
-	resetOrderData() {
+	reset() {
 		this._payment = '';
 		this._address = '';
 		this._phone = '';
