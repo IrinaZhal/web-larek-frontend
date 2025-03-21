@@ -268,8 +268,8 @@ constructor(container: HTMLElement, protected events: IEvents);
 Класс с формой для заказа - выбора типа оплаты и установки адреса.\
 
 Методы класса:
-- set payment(value: string) - для типа оплаты
 - set address(value: string) - для адреса
+- switchButton(button: string, value: boolean) - для смены стилей кнопок
 
 
 ### Class Contact extends Form
